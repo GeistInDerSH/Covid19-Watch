@@ -10,8 +10,8 @@ import (
 const JohnHopkinsURL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_%s_global.csv"
 
 // downloadCSVData attempts to download the CSV data from the given URL and store it into a map
-func downloadCSVData(url string) (map[string]*covid.SingleCovidData, error) {
-	var data map[string]*covid.SingleCovidData
+func downloadCSVData(url string) (map[string]*covid.SingleData, error) {
+	var data map[string]*covid.SingleData
 	response, err := http.Get(url)
 	if err != nil {
 		return data, err
@@ -29,6 +29,6 @@ func downloadCSVData(url string) (map[string]*covid.SingleCovidData, error) {
 
 // GetCSVData downloads the CSV data for the given sufix.
 // The valid suffixes are: confirmed, deaths, or recovered
-func GetCSVData(sufix string) (map[string]*covid.SingleCovidData, error) {
+func GetCSVData(sufix string) (map[string]*covid.SingleData, error) {
 	return downloadCSVData(fmt.Sprintf(JohnHopkinsURL, sufix))
 }

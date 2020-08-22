@@ -1,10 +1,9 @@
-FROM ubuntu:18.04
-RUN apt upgrade -y && \
-	apt update -y && \
-	apt install golang socat git -y
+FROM golang:1.14
 
-RUN go get github.com/GeistInDerSH/Covid19-Watch/covid_data
-
+WORKDIR /go/src/app
 COPY . .
 
-CMD ["/bin/bash", "run.sh"]
+RUN go build main.go
+ENTRYPOINT /go/src/app/main
+
+EXPOSE 80
